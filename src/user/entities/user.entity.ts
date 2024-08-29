@@ -20,10 +20,10 @@ export class User {
   @Column({ nullable: true })
   salt: string;
 
-  @Column({ length: 200 })
+  @Column({ length: 200, nullable: true })
   location: string;
 
-  @Column({ length: 200 })
+  @Column({ length: 200, nullable: true })
   avatar: string;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })

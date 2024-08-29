@@ -18,8 +18,10 @@ import { HolidayModule } from './holiday/holiday.module';
 import { PhoneCodeModule } from './phone-code/phone-code.module';
 import { RegionModule } from './region/region.module';
 import { BookModule } from './book/book.module';
+import { config } from 'dotenv';
+config(); // 加载 .env 文件
 const isProd = process.env.NODE_ENV == 'production';
-
+console.log(process.env, 'process.env');
 @Module({
   imports: [
     HttpModule.register({ timeout: 5000 }),
@@ -30,11 +32,11 @@ const isProd = process.env.NODE_ENV == 'production';
       type: 'mysql',
       synchronize: true,
       autoLoadEntities: true, //自动加载实体
-      host: 'localhost',
-      port: 3306, // 端口号
-      username: 'root', // 用户名
-      password: '123456', // 密码
-      database: 'botany', //数据库名
+      host: process.env.DB_HOST,
+      port: +process.env.DB_PORT,
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
       connectorPackage: 'mysql2',
       entities: ['dist/**/*.entity{.ts,.js}'],
       logging: true,
